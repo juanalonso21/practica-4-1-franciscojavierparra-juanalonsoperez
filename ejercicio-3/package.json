@@ -3,16 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "engines": {
-    "node": "^20.19.0 || >=22.12.0"
-  },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "vite build",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
     "preview": "vite preview",
-    "test:unit": "vitest",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build",
     "lint": "eslint . --fix --cache",
     "format": "prettier --write --experimental-cli src/"
   },
@@ -29,16 +25,20 @@
     "@vue/eslint-config-typescript": "^14.6.0",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.8.1",
+    "@vuepress/bundler-vite": "^2.0.0-rc.26",
+    "@vuepress/theme-default": "^2.0.0-rc.120",
     "eslint": "^9.39.1",
     "eslint-plugin-vue": "~10.5.1",
     "jiti": "^2.6.1",
     "jsdom": "^27.2.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "3.6.2",
+    "sass-embedded": "^1.93.3",
     "typescript": "~5.9.0",
-    "vite": "^7.2.4",
+    "vite": "^6.0.0",
     "vite-plugin-vue-devtools": "^8.0.5",
     "vitest": "^4.0.14",
-    "vue-tsc": "^3.1.5"
+    "vue-tsc": "^3.1.5",
+    "vuepress": "^2.0.0-rc.26"
   }
 }

@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/**
+ * @file GestorHorarios.vue
+ * @description Componente principal para la gestión de horarios de aulas.
+ * Permite visualizar el horario semanal y realizar operaciones CRUD sobre las reservas.
+ */
 import { ref, computed } from 'vue'
 import type { HorariosData, HorarioAula, IAsignatura } from '@/types/schedule'
 import HorarioModal from './HorarioModal.vue'
@@ -58,16 +63,37 @@ const datosModal = ref<{ dia: number; hora: number; asignatura: IAsignatura | nu
 const horarioVisible = computed<HorarioAula>(() => horarios.value[aulaSeleccionada.value]!)
 
 // --- Lógica de Negocio (CRUD) ---
+/**
+ * Abre el modal para crear o editar una reserva en un bloque específico.
+ * 
+ * @param dia - Índice del día de la semana (0-4).
+ * @param hora - Índice de la hora del bloque (0-5).
+ */
 function abrirModal(dia: number, hora: number) {
   datosModal.value = { dia, hora, asignatura: horarioVisible.value[dia]![hora]! }
   modalVisible.value = true
 }
 
+/**
+ * Guarda una reserva (nueva o editada) en la estructura de datos.
+ * 
+ * @param payload - Objeto con los datos de la reserva.
+ * @param payload.dia - Índice del día.
+ * @param payload.hora - Índice de la hora.
+ * @param payload.asignatura - Datos de la asignatura a guardar.
+ */
 function guardarReserva(payload: { dia: number; hora: number; asignatura: IAsignatura }) {
   horarios.value[aulaSeleccionada.value]![payload.dia]![payload.hora] = payload.asignatura
   modalVisible.value = false
 }
 
+/**
+ * Elimina una reserva existente, liberando el bloque horario.
+ * 
+ * @param payload - Objeto con las coordenadas de la reserva a eliminar.
+ * @param payload.dia - Índice del día.
+ * @param payload.hora - Índice de la hora.
+ */
 function eliminarReserva(payload: { dia: number; hora: number }) {
   horarios.value[aulaSeleccionada.value]![payload.dia]![payload.hora] = null
   modalVisible.value = false

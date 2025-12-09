@@ -1,0 +1,5 @@
+import "C:/modulos/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-3/node_modules/@vuepress/highlighter-helper/lib/client/styles/base.css"
+import "C:/modulos/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-3/node_modules/@vuepress/plugin-prismjs/lib/client/styles/nord.css"
+import "C:/modulos/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-3/node_modules/@vuepress/highlighter-helper/lib/client/styles/line-numbers.css"
+import "C:/modulos/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-3/node_modules/@vuepress/highlighter-helper/lib/client/styles/notation-highlight.css"
+import "C:/modulos/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-3/node_modules/@vuepress/highlighter-helper/lib/client/styles/code-block-title.css"

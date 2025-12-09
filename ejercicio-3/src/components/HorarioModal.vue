@@ -1,11 +1,26 @@
 <script setup lang="ts">
+/**
+ * @file HorarioModal.vue
+ * @description Componente modal para crear, editar o eliminar reservas.
+ * Contiene un formulario para los detalles de la asignatura.
+ */
 import { ref, watch } from 'vue'
 import type { IAsignatura } from '@/types/schedule'
 
+/**
+ * Propiedades del componente.
+ * @property datos - Objeto con los datos iniciales para el formulario (null si es nueva reserva).
+ */
 const props = defineProps<{
   datos: { dia: number; hora: number; asignatura: IAsignatura | null } | null
 }>()
 
+/**
+ * Eventos emitidos por el componente.
+ * @emits close - Se emite al cerrar el modal sin guardar.
+ * @emits save - Se emite al guardar una reserva.
+ * @emits delete - Se emite al solicitar eliminar una reserva.
+ */
 const emit = defineEmits<{
   (e: 'close'): void
   (e: 'save', payload: { dia: number; hora: number; asignatura: IAsignatura }): void
@@ -30,6 +45,9 @@ watch(
   { immediate: true }
 )
 
+/**
+ * Emite el evento 'save' con los datos del formulario si existen datos iniciales.
+ */
 function guardar() {
   if (props.datos) {
     emit('save', {
@@ -40,6 +58,9 @@ function guardar() {
   }
 }
 
+/**
+ * Emite el evento 'delete' tras confirmación del usuario.
+ */
 function eliminar() {
   if (props.datos) {
     if (confirm('¿Estás seguro de que quieres eliminar esta reserva?')) {

@@ -1,0 +1,9 @@
+import { GitContributors } from "C:/modulos/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-3/node_modules/@vuepress/plugin-git/lib/client/components/GitContributors.js";
+import { GitChangelog } from "C:/modulos/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-3/node_modules/@vuepress/plugin-git/lib/client/components/GitChangelog.js";
+
+export default {
+  enhance: ({ app }) => {
+    app.component("GitContributors", GitContributors);
+    app.component("GitChangelog", GitChangelog);
+  },
+};
