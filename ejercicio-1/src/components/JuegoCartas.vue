@@ -6,6 +6,7 @@ const {
   iniciarJuego,
   robarCarta,
   jugarCarta,
+  reconstituirMazo,
   manoJugador,
   cartaSuperiorDescarte,
   cantidadMazo,
@@ -32,7 +33,17 @@ onMounted(() => {
             <span v-else>VACÍO</span>
           </div>
           <p>Cartas: {{ cantidadMazo }}</p>
-          <button @click.stop="robarCarta" :disabled="juegoTerminado">Robar Carta</button>
+          <button @click.stop="robarCarta" :disabled="juegoTerminado || cantidadMazo === 0">
+            Robar Carta
+          </button>
+          <button
+            v-if="cantidadMazo === 0"
+            class="btn-shuffle"
+            @click.stop="reconstituirMazo"
+            :disabled="juegoTerminado"
+          >
+            Barajar Descarte
+          </button>
         </div>
 
         <!-- Pila de Descarte -->
@@ -50,6 +61,7 @@ onMounted(() => {
               >{{ cartaSuperiorDescarte.valor }}{{ cartaSuperiorDescarte.simbolo }}</span
             >
           </div>
+          <div v-else class="carta-placeholder"></div>
           <p>Descarte (Cima)</p>
         </div>
       </div>
@@ -63,10 +75,10 @@ onMounted(() => {
       <!-- Zona Inferior: Mano del Jugador -->
       <div class="mano-jugador">
         <h3>Tu Mano ({{ manoJugador.length }})</h3>
-        <div class="cartas-lista">
+        <TransitionGroup name="card-anim" tag="div" class="cartas-lista">
           <div
             v-for="(carta, index) in manoJugador"
-            :key="index"
+            :key="carta.id || index"
             class="carta-frente carta-mano"
             :class="carta.color"
             @click="jugarCarta(carta)"
@@ -75,7 +87,7 @@ onMounted(() => {
             <span class="centro">{{ carta.simbolo }}</span>
             <span class="esquina-bottom">{{ carta.valor }}{{ carta.simbolo }}</span>
           </div>
-        </div>
+        </TransitionGroup>
       </div>
     </div>
   </div>
@@ -84,12 +96,21 @@ onMounted(() => {
 <style scoped>
 .juego-container {
   font-family: 'Arial', sans-serif;
-  margin: 0 auto;
+  margin: 0;
   text-align: center;
   padding: 20px;
   background-color: #2c3e50;
   color: white;
-  border-radius: 10px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tablero {
+  width: 100%;
+  max-width: 1200px;
 }
 
 .zona-mazos {
@@ -101,7 +122,8 @@ onMounted(() => {
 
 /* Estilos de Cartas */
 .carta-dorso,
-.carta-frente {
+.carta-frente,
+.carta-placeholder {
   width: 100px;
   height: 140px;
   border-radius: 8px;
@@ -116,6 +138,7 @@ onMounted(() => {
   transition: transform 0.2s;
   background-color: white;
   user-select: none;
+  position: relative;
 }
 
 .carta-dorso {
@@ -132,6 +155,11 @@ onMounted(() => {
 .carta-frente {
   color: black;
 }
+.carta-placeholder {
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  background: transparent;
+}
+
 .carta-frente.red {
   color: #e74c3c;
 }
@@ -142,6 +170,7 @@ onMounted(() => {
 .carta-mano:hover {
   transform: translateY(-15px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 10;
 }
 
 .esquina-top {
@@ -162,6 +191,7 @@ onMounted(() => {
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
+  min-height: 160px;
 }
 
 .info-panel {
@@ -184,9 +214,36 @@ button {
   color: white;
   border: none;
   border-radius: 4px;
+  display: block; /* Ensure buttons stack */
+  width: 100%;
 }
 button:disabled {
   background: #95a5a6;
   cursor: not-allowed;
+}
+.btn-shuffle {
+  background: #e67e22;
+  margin-top: 5px;
+}
+
+/* Animaciones de Cartas (Vue TransitionGroup) */
+.card-anim-move,
+.card-anim-enter-active,
+.card-anim-leave-active {
+  transition: all 0.5s ease;
+}
+
+.card-anim-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.card-anim-leave-to {
+  opacity: 0;
+  transform: translateY(-50px) scale(0.8);
+}
+
+.card-anim-leave-active {
+  position: absolute;
 }
 </style>

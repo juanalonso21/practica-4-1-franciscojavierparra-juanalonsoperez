@@ -1,6 +1,8 @@
 import { type Palo, type Valor } from '@/types/cards'
 
 export class Carta {
+  public readonly id: string = crypto.randomUUID()
+
   constructor(
     public palo: Palo,
     public valor: Valor,

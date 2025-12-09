@@ -1,7 +1,7 @@
-import { ref, computed, readonly } from 'vue'
+import { ref, computed, readonly, triggerRef } from 'vue'
 import { Pila } from '@/core/Pila'
 import { Carta } from '@/core/Carta'
-import { type Palo,type Valor } from '@/types/cards'
+import { type Palo, type Valor } from '@/types/cards'
 
 export function useJuego() {
   const mazo = ref<Pila<Carta>>(new Pila())
@@ -55,6 +55,9 @@ export function useJuego() {
     // 5. Mover una carta al descarte
     const cartaInicial = mazo.value.pop()
     if (cartaInicial) descarte.value.push(cartaInicial)
+
+    triggerRef(mazo)
+    triggerRef(descarte)
   }
 
   function reconstituirMazo() {
@@ -81,21 +84,25 @@ export function useJuego() {
     cartasBarajadas.forEach((c) => mazo.value.push(c))
 
     mensajeEstado.value = '¡Mazo vacío! Se ha barajado el descarte.'
+
+    triggerRef(mazo)
+    triggerRef(descarte)
   }
 
   function robarCarta() {
     if (juegoTerminado.value) return
 
+    // Ya no reconstituimos automáticamente aquí, el usuario lo hará manualmente
     if (mazo.value.isEmpty()) {
-      reconstituirMazo()
+      mensajeEstado.value = 'El mazo está vacío. Baraja el descarte si es posible.'
+      return
     }
 
     const carta = mazo.value.pop()
     if (carta) {
       manoJugador.value.push(carta)
       mensajeEstado.value = `Has robado: ${carta.nombre}`
-    } else {
-      mensajeEstado.value = 'No quedan cartas ni en el mazo ni para reciclar.'
+      triggerRef(mazo)
     }
   }
 
@@ -106,10 +113,11 @@ export function useJuego() {
 
     if (cartaSuperior && cartaAJugar.esJugableSobre(cartaSuperior)) {
       // Quitar de la mano
-      manoJugador.value = manoJugador.value.filter((c) => c !== cartaAJugar)
+      manoJugador.value = manoJugador.value.filter((c) => c.id !== cartaAJugar.id)
       // Añadir al descarte
       descarte.value.push(cartaAJugar)
       mensajeEstado.value = `Jugaste: ${cartaAJugar.nombre}`
+      triggerRef(descarte)
 
       // Verificar victoria
       if (manoJugador.value.length === 0) {
@@ -125,6 +133,7 @@ export function useJuego() {
     iniciarJuego,
     robarCarta,
     jugarCarta,
+    reconstituirMazo,
     manoJugador: readonly(manoJugador),
     cartaSuperiorDescarte: computed(() => descarte.value.peek()),
     cantidadMazo: computed(() => mazo.value.size()),
