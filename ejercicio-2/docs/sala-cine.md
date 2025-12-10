@@ -16,11 +16,11 @@ import SalaCine from '@/components/SalaCine.vue'
 
 ## Props
 
-| Prop              | Tipo     | Requerido | Default | Descripción                 |
-| ----------------- | -------- | --------- | ------- | --------------------------- |
-| `filas`           | `Number` | Sí        | -       | Número de filas en la sala. |
-| `columnas`        | `Number` | Sí        | -       | Número de butacas por fila. |
-| `precioPorButaca` | `Number` | No        | `8`     | Precio unitario por butaca. |
+| Prop              | Tipo     | Requerido | Default | Descripción                                 |
+| ----------------- | -------- | --------- | ------- | ------------------------------------------- |
+| `filas`           | `Number` | Sí        | -       | Número de filas de butacas en la sala.      |
+| `columnas`        | `Number` | Sí        | -       | Número de butacas por cada fila.            |
+| `precioPorButaca` | `Number` | No        | `8`     | Precio individual por cada butaca en euros. |
 
 ## Tipos de Datos
 

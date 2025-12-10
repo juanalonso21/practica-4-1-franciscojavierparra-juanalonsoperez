@@ -26,21 +26,21 @@
 <td><code v-pre>Number</code></td>
 <td>Sí</td>
 <td>-</td>
-<td>Número de filas en la sala.</td>
+<td>Número de filas de butacas en la sala.</td>
 </tr>
 <tr>
 <td><code v-pre>columnas</code></td>
 <td><code v-pre>Number</code></td>
 <td>Sí</td>
 <td>-</td>
-<td>Número de butacas por fila.</td>
+<td>Número de butacas por cada fila.</td>
 </tr>
 <tr>
 <td><code v-pre>precioPorButaca</code></td>
 <td><code v-pre>Number</code></td>
 <td>No</td>
 <td><code v-pre>8</code></td>
-<td>Precio unitario por butaca.</td>
+<td>Precio individual por cada butaca en euros.</td>
 </tr>
 </tbody>
 </table>
