@@ -98,6 +98,14 @@ function eliminarReserva(payload: { dia: number; hora: number }) {
   horarios.value[aulaSeleccionada.value]![payload.dia]![payload.hora] = null
   modalVisible.value = false
 }
+
+// Exponer para testing
+defineExpose({
+  horarioVisible,
+  guardarReserva,
+  eliminarReserva,
+  aulaSeleccionada // Necesario para cambiar el aula en los tests
+})
 </script>
 
 <template>

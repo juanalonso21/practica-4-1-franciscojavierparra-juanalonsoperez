@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { Pila } from '../src/core/Pila'
+import { Pila } from '@/core/Pila'
 
 describe('Clase Pila', () => {
   let pila: Pila<number>

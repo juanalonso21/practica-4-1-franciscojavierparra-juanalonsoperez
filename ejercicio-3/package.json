@@ -9,6 +9,7 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "preview": "vite preview",
+    "test:unit": "vitest",
     "lint": "eslint . --fix --cache",
     "format": "prettier --write --experimental-cli src/"
   },

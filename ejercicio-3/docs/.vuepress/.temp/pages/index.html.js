@@ -1,5 +1,5 @@
 import comp from "C:/modulos/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-3/docs/.vuepress/.temp/pages/index.html.vue"
-const data = JSON.parse("{\"path\":\"/\",\"title\":\"Hello VuePress\",\"lang\":\"es-ES\",\"frontmatter\":{},\"git\":{},\"filePathRelative\":\"README.md\"}")
+const data = JSON.parse("{\"path\":\"/\",\"title\":\"Hello VuePress\",\"lang\":\"es-ES\",\"frontmatter\":{},\"git\":{\"updatedTime\":1765281802000,\"contributors\":[{\"name\":\"juanalonso21\",\"username\":\"juanalonso21\",\"email\":\"juanalonsopulpi@gmail.com\",\"commits\":1,\"url\":\"https://github.com/juanalonso21\"}],\"changelog\":[{\"hash\":\"f98ebd737dbc33e268a0e438eca26cc32f83cc52\",\"time\":1765281802000,\"email\":\"juanalonsopulpi@gmail.com\",\"author\":\"juanalonso21\",\"message\":\"Cambio para el funcionamiento de la documentacion\"}]},\"filePathRelative\":\"README.md\"}")
 export { comp, data }
 
 if (import.meta.webpackHot) {

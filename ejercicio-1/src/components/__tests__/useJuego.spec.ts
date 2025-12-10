@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { useJuego } from '../src/composables/useJuego'
-import { Carta } from '../src/core/Carta'
+import { useJuego } from '@/composables/useJuego'
+import { Carta } from '@/core/Carta'
 
 describe('Composable useJuego', () => {
   // Obtenemos una instancia fresca para cada test
