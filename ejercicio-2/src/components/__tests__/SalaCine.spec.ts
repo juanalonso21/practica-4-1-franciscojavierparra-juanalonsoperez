@@ -26,12 +26,17 @@ describe('SalaCine.vue', () => {
     expect(vm.sala[0]!.length).toBe(4)
 
     // Check initial state
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const allAvailable = vm.sala.every((fila: any) =>
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      fila.every((butaca: any) => butaca.estado === EstadoButaca.DISPONIBLE),
-    )
-    expect(allAvailable).toBe(true)
+    // F1-C3 should be DAÑADO (from hardcoded list)
+    const damagedIds = ['F1-C3'] // In this 3x4 grid, only F1-C3 matches the hardcoded list ['F1-C3', 'F2-C5', 'F5-C8']
+
+    vm.sala.forEach((fila) => {
+      fila.forEach((butaca) => {
+        const expectedState = damagedIds.includes(butaca.id)
+          ? EstadoButaca.DAÑADO
+          : EstadoButaca.DISPONIBLE
+        expect(butaca.estado).toBe(expectedState)
+      })
+    })
   })
 
   it('Test 2: Selection of available seat', async () => {
@@ -93,7 +98,7 @@ describe('SalaCine.vue', () => {
     expect(b2.estado).toBe(EstadoButaca.OCUPADO)
 
     // Check others are still Available
-    const b3 = vm.sala[0]![2]!
+    const b3 = vm.sala[0]![3]! // F1-C4 (avoid F1-C3 which is damaged)
     expect(b3.estado).toBe(EstadoButaca.DISPONIBLE)
   })
 

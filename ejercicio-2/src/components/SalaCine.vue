@@ -16,14 +16,24 @@ const sala = ref<IButaca[][]>([])
 // --- Inicialización ---
 const inicializarSala = () => {
   const nuevaSala: IButaca[][] = []
+  // Definir manualmente las butacas rotas
+  const butacasDañadas = ['F1-C3', 'F2-C5', 'F5-C8', 'F7-C12', 'F8-C14', 'F8-C13']
+
   for (let f = 1; f <= props.filas; f++) {
     const fila: IButaca[] = []
     for (let c = 1; c <= props.columnas; c++) {
+      const id = `F${f}-C${c}`
+      let estado = EstadoButaca.DISPONIBLE
+
+      if (butacasDañadas.includes(id)) {
+        estado = EstadoButaca.DAÑADO
+      }
+
       fila.push({
-        id: `F${f}-C${c}`,
+        id,
         fila: f,
         columna: c,
-        estado: EstadoButaca.DISPONIBLE,
+        estado,
       })
     }
     nuevaSala.push(fila)
@@ -101,6 +111,24 @@ defineExpose({
         </button>
       </template>
     </div>
+    <div class="leyenda">
+      <div class="item-leyenda">
+        <span class="color-box disponible"></span>
+        <span>Disponible</span>
+      </div>
+      <div class="item-leyenda">
+        <span class="color-box seleccionado"></span>
+        <span>Seleccionada</span>
+      </div>
+      <div class="item-leyenda">
+        <span class="color-box ocupado"></span>
+        <span>Ocupada</span>
+      </div>
+      <div class="item-leyenda">
+        <span class="color-box dañado"></span>
+        <span>No disponible</span>
+      </div>
+    </div>
 
     <div class="resumen">
       <h3>Resumen de Selección</h3>
@@ -121,6 +149,7 @@ defineExpose({
 </template>
 
 <style scoped>
+
 .sala-cine {
   display: flex;
   flex-direction: column;
@@ -129,14 +158,17 @@ defineExpose({
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
+  background-color: #2c2c2c; /* Dark background for contrast */
+  color: #fff; /* Light text */
+  border-radius: 8px; /* Slight rounded corners */
 }
 
 .pantalla {
   width: 100%;
-  background-color: #333;
-  color: white;
+  background-color: #e2e4ef;
+  color: #030000;
   text-align: center;
-  padding: 10px;
+  padding: 3px;
   margin-bottom: 20px;
   border-radius: 4px;
 }
@@ -147,10 +179,54 @@ defineExpose({
   justify-content: center;
 }
 
+.leyenda {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px; /* Moved below as per user structure */
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.item-leyenda {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #fff; /* Light text for dark bg */
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.color-box.disponible {
+  background-color: #2ecc71;
+  border-color: #27ae60;
+}
+
+.color-box.seleccionado {
+  background-color: #3498db;
+  border-color: #2980b9;
+}
+
+.color-box.ocupado {
+  background-color: #e74c3c;
+  border-color: #c0392b;
+}
+
+.color-box.dañado {
+  background-color: #95a5a6;
+  border-color: #7f8c8d;
+}
+
 .butaca {
   width: 40px;
   height: 40px;
-  border: 1px solid #ccc;
+  border: 1px solid #555; /* Lighter border for dark mode */
   border-radius: 4px;
   cursor: pointer;
   display: flex;
@@ -158,13 +234,14 @@ defineExpose({
   justify-content: center;
   font-size: 0.7rem;
   font-weight: bold;
-  background-color: #fff;
-  transition: background-color 0.2s;
-  color: #333;
+  background-color: #444; /* Darker default seat bg */
+  transition: all 0.2s;
+  color: #fff;
 }
 
 .butaca-id {
   visibility: visible;
+  opacity: 0.8;
 }
 
 /* Estados */
@@ -198,13 +275,14 @@ defineExpose({
 }
 
 .resumen {
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: #151414; /* Darker summary box */
+  color: #fff;
   padding: 20px;
   border-radius: 8px;
   width: 100%;
   text-align: center;
-  border: 1px solid #ddd;
+  border: 1px solid #686666;
+  margin-top: 20px;
 }
 
 .btn-confirmar {
