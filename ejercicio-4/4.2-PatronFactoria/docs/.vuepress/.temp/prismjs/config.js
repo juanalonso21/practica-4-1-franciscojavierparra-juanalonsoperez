@@ -1,0 +1,5 @@
+import "/Users/franparra/Documents/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-4/4.2-PatronFactoria/node_modules/@vuepress/highlighter-helper/lib/client/styles/base.css"
+import "/Users/franparra/Documents/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-4/4.2-PatronFactoria/node_modules/@vuepress/plugin-prismjs/lib/client/styles/nord.css"
+import "/Users/franparra/Documents/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-4/4.2-PatronFactoria/node_modules/@vuepress/highlighter-helper/lib/client/styles/line-numbers.css"
+import "/Users/franparra/Documents/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-4/4.2-PatronFactoria/node_modules/@vuepress/highlighter-helper/lib/client/styles/notation-highlight.css"
+import "/Users/franparra/Documents/2DAW/DWEC/practica-4-1-franciscojavierparra-juanalonsoperez/ejercicio-4/4.2-PatronFactoria/node_modules/@vuepress/highlighter-helper/lib/client/styles/code-block-title.css"
