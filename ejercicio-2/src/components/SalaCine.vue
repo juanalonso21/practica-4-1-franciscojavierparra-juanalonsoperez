@@ -19,12 +19,6 @@ const inicializarSala = () => {
   for (let f = 1; f <= props.filas; f++) {
     const fila: IButaca[] = []
     for (let c = 1; c <= props.columnas; c++) {
-      // Simulación de estados iniciales aleatorios o fijos si se deseara,
-      // pero por defecto TODO disponible según requisitos, salvo que se diga lo contrario.
-      // El requisito dice "configurables", pero también "visualizar disposición".
-      // Para el ejercicio, iniciamos todo en DISPONIBLE.
-      // Se podría añadir lógica para marcar algunos como OCUPADO/DAÑADO aleatoriamente o por config,
-      // pero los tests piden "estado inicial DISPONIBLE".
       fila.push({
         id: `F${f}-C${c}`,
         fila: f,
@@ -145,8 +139,6 @@ defineExpose({
   padding: 10px;
   margin-bottom: 20px;
   border-radius: 4px;
-  box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.3);
-  transform: perspective(500px) rotateX(-5deg);
 }
 
 .grid-butacas {
@@ -158,71 +150,51 @@ defineExpose({
 .butaca {
   width: 40px;
   height: 40px;
-  border: none;
-  border-radius: 8px 8px 4px 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.7rem;
   font-weight: bold;
-  transition: all 0.2s;
-  position: relative;
-}
-
-.butaca::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 10%;
-  width: 80%;
-  height: 5px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
+  background-color: #fff;
+  transition: background-color 0.2s;
+  color: #333;
 }
 
 .butaca-id {
-  visibility: hidden; /* Hide ID by default to keep it clean, show on hover? Or just show state color */
-  /* Or maybe show concise ID */
   visibility: visible;
-  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Estados */
 .butaca.disponible {
-  background-color: #4caf50; /* Green */
+  background-color: #2ecc71; /* Vivid Emerald */
+  border-color: #27ae60;
   color: white;
 }
 .butaca.disponible:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
+  background-color: #27ae60;
 }
 
 .butaca.seleccionado {
-  background-color: #2196f3; /* Blue */
+  background-color: #3498db; /* Vivid Blue */
+  border-color: #2980b9;
   color: white;
-  box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
-  transform: translateY(-2px);
 }
 
 .butaca.ocupado {
-  background-color: #f44336; /* Red */
-  color: #ffcdd2;
+  background-color: #e74c3c; /* Vivid Red */
+  border-color: #c0392b;
+  color: white;
   cursor: not-allowed;
-  opacity: 0.8;
 }
 
 .butaca.dañado {
-  background-color: #9e9e9e; /* Grey */
-  color: #e0e0e0;
+  background-color: #95a5a6; /* Vivid Grey */
+  border-color: #7f8c8d;
+  color: white;
   cursor: not-allowed;
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 5px,
-    rgba(0, 0, 0, 0.1) 5px,
-    rgba(0, 0, 0, 0.1) 10px
-  );
 }
 
 .resumen {
@@ -239,20 +211,20 @@ defineExpose({
   margin-top: 10px;
   padding: 10px 20px;
   font-size: 1rem;
-  background-color: #ff9800;
+  background-color: #e67e22; /* Vivid Orange */
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 
 .btn-confirmar:hover:not(:disabled) {
-  background-color: #f57c00;
+  background-color: #d35400;
 }
 
 .btn-confirmar:disabled {
-  background-color: #ffcc80;
+  background-color: #f39c12;
   cursor: not-allowed;
+  opacity: 0.6;
 }
 </style>
